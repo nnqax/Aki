@@ -17,6 +17,99 @@
     --s3: #dddddd;
 }
 
+/* Mobile styles */
+@media screen and (max-width: 991.98px) {
+    #mobilenav {
+        position: fixed;
+        display: flex;
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+        background: var(--bg);
+        z-index: 100;
+        border-top: 1px solid var(--primary);
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    #mobilenav .col {
+        flex: 1;
+        text-align: center;
+    }
+
+    #mobilenav h2 {
+        font-size: 14px;
+        padding: 8px 0;
+        margin: 0;
+    }
+
+    .mobile-active {
+        background: var(--primary);
+        color: var(--bg);
+        border-radius: 4px;
+    }
+
+    .mobile-inactive {
+        color: var(--primary);
+    }
+
+    /* Make windows full screen on mobile */
+    .window {
+        width: 100% !important;
+        height: calc(100vh - 50px) !important; /* Account for mobile nav */
+        max-width: none !important;
+        min-width: auto !important;
+        left: 0 !important;
+        top: 0 !important;
+        transform: scale(1) !important;
+        position: fixed;
+        z-index: 99;
+    }
+
+    /* Hide desktop icons on mobile */
+    .icon-container {
+        display: none;
+    }
+
+    /* Adjust window content for mobile */
+    .scrollable {
+        padding-bottom: 60px; /* Space for mobile nav */
+    }
+
+    /* Make sure windows are visible */
+    #w0, #w2, #w3, #w4 {
+        display: none; /* Initially hidden */
+    }
+
+    /* Show the active window */
+    #w0.mobile-active-window,
+    #w2.mobile-active-window,
+    #w3.mobile-active-window,
+    #w4.mobile-active-window {
+        display: block;
+    }
+
+    /* Adjust windownav for mobile */
+    .windownav {
+        height: 40px;
+    }
+
+    /* Make content more compact */
+    .container {
+        padding: 8px !important;
+    }
+
+    /* Adjust tables for mobile */
+    .table {
+        font-size: 12px;
+    }
+
+    /* Make sure iframes fit */
+    .embed-full {
+        height: 400px;
+    }
+}
+
 .s1-color {
     background-color: var(--s1);
 }
