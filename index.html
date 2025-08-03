@@ -1,47 +1,44 @@
 <!DOCTYPE html>
 <html>
-
-<!--
-hi nice to see u here! sorry for the mess...
-feel free to take inspo from my site and lmk if you have any questions!
-@maddycha
-  -->
-
 <head>
-    <title>maddycha</title>
+    <title>Aki</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap"
-        rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" href="https://webring.nekoweb.org/onionring.css">
-    <link rel="shortcut icon" type="image/png" href="imgs/misc/favicon.png" />
-    <meta property="og:title" content="maddycha" />
-    <meta property="og:url" content="https://www.maddycha.com/" />
-    <meta property="og:image" content="https://i.ibb.co/RGFTFwX7/Frame-44.png" />
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="og:site_name" content="maddycha">
-    <meta name="twitter:image:alt" content="preview of maddycha.com homepage">
-    <meta property="og:description" content="personal website for designer/illustrator/hobbyist maddy cha">
-    <div class="crt"></div>
-    <base target="_blank">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary: #000000;
+            --secondary: #00000070;
+            --bg-img: url(../imgs/sadgrl/apple.gif);
+            --bg: #ffffff;
+            --red: #E18E86;
+            --yellow: #EDC452;
+            --green: #CDC39C;
+            --blue: rgba(168, 193, 193);
+            --pink: #F4D9DB;
+            --a0: #000000;
+            --gb: #D1DDFC;
+            --a1: #F1BFCC;
+            --s0: #CDC39C;
+            --s1: #F2A83B;
+            --s2: #00a8f8;
+            --s3: #dddddd;
+        }
+
         /* Basic mobile styles */
-        @media (max-width: 768px) {
+        @media (max-width: 991.98px) {
             .window {
                 width: 100% !important;
-                height: 80vh !important;
-                top: 10vh !important;
+                height: calc(100dvh - 40px) !important;
+                top: 0 !important;
                 left: 0 !important;
                 position: fixed !important;
                 z-index: 1000;
                 display: none;
+                overflow-y: auto;
             }
             
             #mobilenav {
@@ -63,11 +60,46 @@ feel free to take inspo from my site and lmk if you have any questions!
                 display: none !important;
             }
             
-            .icon-container {
-                padding-top: 20px;
+            .mobile-active {
+                background: var(--primary);
+                color: var(--bg);
+                padding: 4px;
+                border-radius: 24px;
+            }
+            
+            .mobile-inactive {
+                background: #00000010;
+                padding: 4px;
+                border-radius: 24px;
+            }
+            
+            /* Art window adjustments */
+            #w2 .artcontent {
+                width: 100% !important;
+                flex-direction: column;
+            }
+            
+            #w2 #gallery, 
+            #w2 #previewer {
+                width: 100% !important;
+                border: none !important;
+            }
+            
+            #w2 #preview-img {
+                width: 100% !important;
+                max-height: 50vh;
+            }
+            
+            /* Guestbook iframe */
+            #w4 iframe {
+                height: 500px !important;
+            }
+            
+            .container {
+                padding: 12px !important;
             }
         }
-        
+
         /* Basic window styling */
         .window {
             background: white;
@@ -76,6 +108,8 @@ feel free to take inspo from my site and lmk if you have any questions!
             box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
             position: absolute;
             overflow: hidden;
+            transform: scale(0);
+            transition: transform 0.2s ease-out;
         }
         
         .windownav {
@@ -96,115 +130,270 @@ feel free to take inspo from my site and lmk if you have any questions!
             height: calc(100% - 40px);
         }
         
-        /* Mobile nav styles */
+        body {
+            background: var(--bg);
+            background-size: cover;
+            background-attachment: fixed;
+            background-image: radial-gradient(var(--primary) 1px, transparent 0);
+            background-size: 60px 60px;
+            font-family: 'Mona Sans', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        #laptop {
+            height: 100vh;
+        }
+        
+        /* CRT effect */
+        .crt::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(#12101000 50%, #0000001a 50%), 
+                        linear-gradient(90deg, #ff000008, #00ff0005, #0000ff08);
+            z-index: 400;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none
+        }
+        
+        @keyframes flicker {
+            0% { opacity: .27861 }
+            5% { opacity: .34769 }
+            10% { opacity: .23604 }
+            15% { opacity: .10626 }
+            20% { opacity: .18128 }
+            25% { opacity: .10626 }
+            30% { opacity: .18128 }
+            35% { opacity: .23604 }
+        }
+        
+        .crt::after {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: #12101005;
+            opacity: 0;
+            z-index: 400;
+            pointer-events: none;
+            animation: flicker .2s infinite
+        }
+        
+        /* Desktop icons */
+        .icon-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+        
+        .icon {
+            width: 80px;
+            height: 100px;
+            text-align: center;
+            background: var(--bg);
+            border-radius: 24px;
+            z-index: 1;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+        }
+        
+        .icon img {
+            width: 72px;
+        }
+        
+        #w0icon { left: calc(50% - 200px); top: calc(50% - 40px); }
+        #w2icon { left: calc(50% - 80px); top: calc(50% - 140px); }
+        #w3icon { left: calc(50% + 240px); top: calc(50% - 20px); }
+        #w4icon { left: calc(50% + 170px); top: calc(50% + 100px); }
+        
+        /* Window sizing */
+        #w0, #w3 { width: 64%; min-width: 840px; max-width: 1000px; height: 82vh; }
+        #w1 { width: 640px; height: 600px; }
+        #w2 { width: 921px; height: 500px; }
+        #w4 { width: 780px; height: 60vh; }
+        
+        /* Content styles */
+        h2, h3, h4 {
+            font-family: "Instrument Serif", serif;
+        }
+        
+        .bottom-rounded {
+            border-bottom-right-radius: 8px;
+            border-bottom-left-radius: 8px;
+            overflow: hidden;
+            height: calc(100% - 93px);
+        }
+        
+        .web-bar {
+            border-bottom: 1px solid var(--primary);
+        }
+        
+        .tabs h5 {
+            padding: 0 10px;
+            margin: 0;
+            cursor: pointer;
+        }
+        
+        /* Mobile nav */
         #mobilenav {
             display: none;
         }
         
         #mobilenav .col {
             text-align: center;
-            cursor: pointer;
-        }
-        
-        .mobile-active {
-            font-weight: bold;
-            text-decoration: underline;
         }
     </style>
 </head>
-
 <body>
+    <div class="crt"></div>
   
-<div id="mobilenav">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h2 onclick="openMobileWindow('w0');" id="about-mobile" class="mobile-active">about</h2>
-            </div>
-            <div class="col">
-                <h2 onclick="openMobileWindow('w1');" id="dressup-mobile" class="mobile-inactive">dressup</h2>
-            </div>
-            <div class="col">
-                <h2 onclick="openMobileWindow('w2');" id="art-mobile" class="mobile-inactive">art</h2>
-            </div>
-            <div class="col">
-                <h2 onclick="openMobileWindow('w3');" id="social-mobile" class="mobile-inactive">social</h2>
-            </div>
-            <div class="col">
-                <h2 onclick="openMobileWindow('w4');" id="guestbook-mobile" class="mobile-inactive">guestbook</h2>
+    <!-- Mobile Navigation -->
+    <div id="mobilenav">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2 onclick="openMobileWindow('w0');" id="about-mobile" class="mobile-active">about</h2>
+                </div>
+                <div class="col">
+                    <h2 onclick="openMobileWindow('w1');" id="dressup-mobile" class="mobile-inactive">dressup</h2>
+                </div>
+                <div class="col">
+                    <h2 onclick="openMobileWindow('w2');" id="art-mobile" class="mobile-inactive">art</h2>
+                </div>
+                <div class="col">
+                    <h2 onclick="openMobileWindow('w3');" id="social-mobile" class="mobile-inactive">social</h2>
+                </div>
+                <div class="col">
+                    <h2 onclick="openMobileWindow('w4');" id="guestbook-mobile" class="mobile-inactive">guestbook</h2>
+                </div>
             </div>
         </div>
     </div>
-</div>
   
+    <!-- Desktop Navigation -->
     <div id="macnav" class="mobile-none">
-        <!-- Your existing desktop nav code -->
+        <div class="container m-0 p-0" style="height: 40px;">
+            <div class="row m-0 p-0 h-100">
+                <div class="col-sm-3" style="width: 285px;border-right: solid 1px var(--primary);">
+                    <div id="sitemap">
+                        <h2 style="padding:12px 0px;">sitemap</h2>
+                        <ul class="sitemap-list mb-3" style="width: 260px;">
+                            <li onclick="openWindow(w0);">about
+                                <ul class="mb-2">
+                                    <li onclick="openAboutTab(a0);openWindow(w0);">about me</li>
+                                    <li onclick="openAboutTab(a1);openWindow(w0);">site info</li>
+                                </ul>
+                            </li>
+                            <li class="mb-2" onclick="openWindow(w2);">art</li>
+                            <li onclick="openWindow(w3);">social
+                                <ul class="mb-2">
+                                    <li onclick="openSocialTab(s0);openWindow(w3);">links</li>
+                                    <li onclick="openSocialTab(s1);openWindow(w3);">resources</li>
+                                    <li onclick="openSocialTab(s2);openWindow(w3);">rhythm-ring</li>
+                                    <li onclick="openSocialTab(s3);openWindow(w3);">sites</li>
+                                </ul>
+                            </li>
+                            <li class="mb-2" onclick="openWindow(w4);">guestbook</li>
+                        </ul>
+                    </div>
+                    <ul id="copy-open" onclick="openSitemap()">
+                        <li>&copy; maddy cha 2025</li>
+                    </ul>
+                </div>
+                <div class="col gx-2 gy-1">
+                    <ul id="openwindows"></ul>
+                </div>
+                <div class="col-sm-2">
+                    <ul id="date-time">
+                        <li id="date"></li>
+                        <li id="time"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Main Content -->
     <div id="laptop">
+        <!-- Desktop Icons -->
         <div class="icon-container mobile-none center">
-            <div class="icon" id="w0icon" onclick="openWindow('w0')">
+            <div class="icon" id="w0icon" onclick="openWindow(w0)">
                 <img src="imgs/icons/about.png">
                 <h3>about</h3>
             </div>
-            <div class="icon" id="w1icon" onclick="openWindow('w1')">
-                <img src="imgs/icons/dressup.png">
-                <h3>dressup</h3>
-            </div>
-            <div class="icon" id="w2icon" onclick="openWindow('w2')">
+            <div class="icon" id="w2icon" onclick="openWindow(w2)">
                 <img src="imgs/icons/art.png">
                 <h3>art</h3>
             </div>
-            <div class="icon" id="w3icon" onclick="openWindow('w3')">
+            <div class="icon" id="w3icon" onclick="openWindow(w3)">
                 <img src="imgs/icons/social.png">
                 <h3>social</h3>
             </div>
-            <div class="icon" id="w4icon" onclick="openWindow('w4')">
+            <div class="icon" id="w4icon" onclick="openWindow(w4)">
                 <img src="imgs/icons/guestbook.png">
                 <h3>guestbook</h3>
             </div>
-
             <div class="center">
                 <img src="imgs/misc/main.png" style="height: 240px; z-index: 0;opacity: 1.0;">
             </div>
         </div>
 
         <!-- Windows -->
+        <!-- About Window -->
         <div class="section window" id="w0" onmousedown="orderDiv(this);">
             <div class="windownav" id="w0nav">
                 <h3>about</h3>
-                <div class="x" onclick="closeWindow('w0')">
+                <div class="x" onclick="closeWindow(w0)">
                     <h3>x</h3>
                 </div>
             </div>
             <div class="web-bar">
                 <div class="tabs d-flex">
-                    <h5 onclick="openAboutTab(this)" id="a0" class="a-active-tab"><img src="imgs/xyz/cee79f35.gif">
-                        about me
-                    </h5>
-                    <h5 onclick="openAboutTab(this)" id="a1" class=""><img src="imgs/pixel-safari/e8b3f1aa.gif"> site
-                        info
-                    </h5>
+                    <h5 onclick="openAboutTab(this)" id="a0" class="a-active-tab">about me</h5>
+                    <h5 onclick="openAboutTab(this)" id="a1">site info</h5>
+                    <div class="flex-fill" style="border-bottom: solid 1px var(--primary);"></div>
                 </div>
             </div>
             <div class="bottom-rounded">
                 <div id="a0Content" class="container scrollable">
-                    <!-- Your about content -->
-                    <h4>about me</h4>
-                    <p>hi i'm Noor Hanafi welcome to this about me page!</p>
+                    <div class="row g-2">
+                        <div class="col">
+                            <h4>about me</h4>
+                            <section>
+                                <p>hi i'm Noor Hanafi welcome to this about me page!</p>
+                                <p>As a student, I find myself always curious about the things I learn every day...</p>
+                            </section>
+                        </div>
+                    </div>
                 </div>
                 <div id="a1Content" style="display: none;" class="container scrollable">
-                    <!-- Your site info content -->
-                    <h4>about this site</h4>
-                    <p>This site was fully coded by the incredible Maddy</p>
+                    <div class="row g-2 mb-2">
+                        <div class="col">
+                            <h4>about this site</h4>
+                            <section>
+                                <p>This site was fully coded by the incredible Maddy</p>
+                            </section>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <!-- Dress Up Window -->
         <div class="section window" id="w1" onmousedown="orderDiv(this)">
             <div class="windownav" id="w1nav">
                 <h3>dress up</h3>
-                <div class="x" onclick="closeWindow('w1')">
+                <div class="x" onclick="closeWindow(w1)">
                     <h3>x</h3>
                 </div>
             </div>
@@ -214,10 +403,11 @@ feel free to take inspo from my site and lmk if you have any questions!
             </div>
         </div>
 
+        <!-- Art Window -->
         <div class="section window" id="w2" onmousedown="orderDiv(this)">
             <div class="windownav" id="w2nav">
                 <h3>art</h3>
-                <div class="x" onclick="closeWindow('w2')">
+                <div class="x" onclick="closeWindow(w2)">
                     <h3>x</h3>
                 </div>
             </div>
@@ -227,32 +417,62 @@ feel free to take inspo from my site and lmk if you have any questions!
                         <div class="col" id="previewer">
                             <img id="preview-img" src="imgs/art/23.png" style="max-width:100%;">
                         </div>
+                        <div class="col scrollable" id="gallery">
+                            <!-- Art gallery content would go here -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Social Window -->
         <div class="section window" id="w3" onmousedown="orderDiv(this)">
             <div class="windownav" id="w3nav">
                 <h3>social</h3>
-                <div class="x" onclick="closeWindow('w3')">
+                <div class="x" onclick="closeWindow(w3)">
                     <h3>x</h3>
                 </div>
             </div>
-            <div class="bottom-rounded scrollable">
-                <h4 style="padding: 20px;">Social Links</h4>
-                <div style="padding: 0 20px;">
-                    <p><a href="https://www.instagram.com/maddycha">Instagram</a></p>
-                    <p><a href="https://twitter.com/maddycha">Twitter</a></p>
-                    <p><a href="https://bsky.app/profile/maddycha.com">Bluesky</a></p>
+            <div class="web-bar">
+                <div class="tabs d-flex">
+                    <h5 onclick="openSocialTab(this)" id="s0" class="s-active-tab">links</h5>
+                    <h5 onclick="openSocialTab(this)" id="s1">resources</h5>
+                    <h5 class="mobile-none" onclick="openSocialTab(this)" id="s2">rhythm ring</h5>
+                    <h5 class="mobile-none" onclick="openSocialTab(this)" id="s3">sites</h5>
+                    <div class="flex-fill" style="border-bottom: solid 1px var(--primary);"></div>
+                </div>
+            </div>
+            <div class="bottom-rounded">
+                <div id="s0Content" class="container scrollable">
+                    <div class="row g-2 mb-2">
+                        <div class="col">
+                            <h4>find me</h4>
+                            <section>
+                                <p><a href="https://www.instagram.com/maddycha">instagram</a></p>
+                                <p><a href="https://twitter.com/maddycha">twitter</a></p>
+                                <p><a href="https://bsky.app/profile/maddycha.com">bluesky</a></p>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <div id="s1Content" style="display: none;" class="container scrollable">
+                    <h4>resources</h4>
+                    <p>Resources content would go here</p>
+                </div>
+                <div id="s2Content" style="display: none; padding:0px" class="container scrollable">
+                    <iframe class="embed-full" scrollable="yes" src="https://maddycha.com/rhythm-ring" title="rhythm ring webring"></iframe>
+                </div>
+                <div id="s3Content" style="display: none; padding:0px" class="container scrollable">
+                    <iframe class="embed-full" scrollable="yes" src="https://maddycha.com/sites" title="sites"></iframe>
                 </div>
             </div>
         </div>
 
+        <!-- Guestbook Window -->
         <div class="section window" id="w4" onmousedown="orderDiv(this)">
             <div class="windownav" id="w4nav">
                 <h3>guestbook</h3>
-                <div class="x" onclick="closeWindow('w4')">
+                <div class="x" onclick="closeWindow(w4)">
                     <h3>x</h3>
                 </div>
             </div>
@@ -261,13 +481,7 @@ feel free to take inspo from my site and lmk if you have any questions!
                     <div class="row g-2 mb-2">
                         <section id="guestbooks___guestbook-form-container" class="box20">
                             <div class="icon01"></div>
-                            <iframe
-                               src="https://aki-guestbook.atabook.org/"
-                                   width="100%"
-                                  height="500px"
-                                  frameborder="0"
-                                  style="border: 1px solid #ddd;"
-                                  ></iframe>
+                            <iframe src="https://aki-guestbook.atabook.org/" width="100%" height="500px" frameborder="0" style="border: 1px solid #ddd;"></iframe>
                         </section>
                     </div>
                 </div>
@@ -276,87 +490,182 @@ feel free to take inspo from my site and lmk if you have any questions!
     </div>
 
     <script>
-        // Basic window management for mobile
+        // Window management
+        var windows = [];
+        windows.push({ name: "w0", pos: false, text: "about", openId: "ow0" });
+        windows.push({ name: "w1", pos: false, text: "dressup", openId: "ow1" });
+        windows.push({ name: "w2", pos: false, text: "art", openId: "ow2" });
+        windows.push({ name: "w3", pos: false, text: "social", openId: "ow3" });
+        windows.push({ name: "w4", pos: false, text: "guestbook", openId: "ow4" });
+
+        // Z-index ordering
+        var windowsZ = ["w0", "w1", "w2", "w3", "w4"];
+        
+        // Initialize drag for all windows
+        function dragElement(elmnt) {
+            var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            if (document.getElementById(elmnt.id + "nav")) {
+                document.getElementById(elmnt.id + "nav").onmousedown = dragMouseDown;
+            } else {
+                elmnt.onmousedown = dragMouseDown;
+            }
+
+            function dragMouseDown(e) {
+                e = e || window.event;
+                e.preventDefault();
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                document.onmousemove = elementDrag;
+            }
+
+            function elementDrag(e) {
+                e = e || window.event;
+                e.preventDefault();
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+
+                var bottomLimit = window.innerHeight - elmnt.offsetHeight - (document.getElementById("macnav") ? document.getElementById("macnav").offsetHeight : 0) + 2;
+                var rightLimit = 1 + window.innerWidth - elmnt.offsetWidth;
+                
+                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+
+                if (elmnt.offsetTop - pos2 <= -1) elmnt.style.top = -1 + "px";
+                if (elmnt.offsetLeft - pos1 <= -1) elmnt.style.left = -1 + "px";
+                if (elmnt.offsetTop - pos2 >= bottomLimit) elmnt.style.top = bottomLimit + "px";
+                if (elmnt.offsetLeft - pos1 >= rightLimit) elmnt.style.left = rightLimit + "px";
+            }
+
+            function closeDragElement() {
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+
+        // Initialize drag for all windows
+        dragElement(document.getElementById("w0"));
+        dragElement(document.getElementById("w1"));
+        dragElement(document.getElementById("w2"));
+        dragElement(document.getElementById("w3"));
+        dragElement(document.getElementById("w4"));
+
+        // Window ordering
+        function orderDiv(x) {
+            var itemToFind = x.id;
+            var foundIdx = windowsZ.findIndex(el => el == itemToFind);
+            windowsZ.splice(foundIdx, 1);
+            windowsZ.unshift(itemToFind);
+            
+            for (var i = 0; i < windowsZ.length; i++) {
+                document.getElementById(windowsZ[i]).style.zIndex = 10 - i;
+            }
+        }
+
+        // Mobile window management
         function openMobileWindow(windowId) {
-            // Hide all windows
+            // Hide all windows first
             document.querySelectorAll('.window').forEach(w => {
                 w.style.display = 'none';
             });
             
-            // Show selected window
+            // Show the selected window
             document.getElementById(windowId).style.display = 'block';
+            document.getElementById(windowId).style.transform = "scale(1)";
             
-            // Update mobile nav active state
+            // Update active state in mobile nav
             document.querySelectorAll('#mobilenav h2').forEach(item => {
                 item.classList.remove('mobile-active');
                 item.classList.add('mobile-inactive');
             });
             
+            // Set clicked item as active
             document.getElementById(windowId + '-mobile').classList.remove('mobile-inactive');
             document.getElementById(windowId + '-mobile').classList.add('mobile-active');
-        }
-        
-        function closeWindow(windowId) {
-            document.getElementById(windowId).style.display = 'none';
             
-            // For mobile, reset the active state
-            if(window.innerWidth <= 768) {
-                document.getElementById(windowId + '-mobile').classList.remove('mobile-active');
-                document.getElementById(windowId + '-mobile').classList.add('mobile-inactive');
-            }
-        }
-        
-        function openWindow(windowId) {
-            if(window.innerWidth <= 768) {
-                openMobileWindow(windowId);
-            } else {
-                // Desktop version would have different behavior
-                document.getElementById(windowId).style.display = 'block';
-            }
-        }
-        
-        function orderDiv(el) {
             // Bring window to front
-            let windows = document.querySelectorAll('.window');
-            let maxZ = 0;
-            
-            windows.forEach(w => {
-                let z = parseInt(w.style.zIndex) || 0;
-                if(z > maxZ) maxZ = z;
-                w.style.zIndex = z - 1;
-            });
-            
-            el.style.zIndex = maxZ + 1;
+            orderDiv(document.getElementById(windowId));
         }
-        
-        // Tab switching for about page
-        function openAboutTab(tabElement) {
-            // Remove active class from all tabs
-            document.querySelectorAll('.web-bar .tabs h5').forEach(tab => {
-                tab.classList.remove('a-active-tab');
-            });
-            
-            // Add active class to clicked tab
-            tabElement.classList.add('a-active-tab');
-            
-            // Hide all content
-            document.querySelectorAll('#w0 .scrollable').forEach(content => {
-                content.style.display = 'none';
-            });
-            
-            // Show selected content
-            const tabId = tabElement.id;
-            const contentId = tabId.replace('a', 'a') + 'Content';
-            document.getElementById(contentId).style.display = 'block';
+
+        // Open window function
+        function openWindow(x) {
+            var openW = x.id;
+            var bottomLimit = 2 + window.innerHeight - document.getElementById(openW).offsetHeight - 
+                             (document.getElementById("macnav") ? document.getElementById("macnav").offsetHeight : 0);
+            var rightLimit = 0 + window.innerWidth - document.getElementById(openW).offsetWidth;
+            var num = openW.slice(1);
+            var openPos = windows[num].pos;
+
+            for (var o = 0; o < windows.length; o++) {
+                if (o == num && windows[o].pos == false) {
+                    document.getElementById(openW).style.left = Math.random() * rightLimit + 'px';
+                    document.getElementById(openW).style.top = Math.random() * bottomLimit + 'px';
+                    document.getElementById('openwindows').innerHTML += "<li class='open' id='" + windows[o].openId + "' onclick='openWindow(" + openW + ")';'><img src='imgs/icons/" + windows[o].text + ".png'>" + windows[o].text + "</li>"
+                    windows[o].pos = true;
+                }
+            }
+            document.getElementById(openW).style.transform = "scale(1)";
+            orderDiv(document.getElementById(openW));
         }
-        
-        // Initialize - show about window on load
+
+        // Close window function
+        function closeWindow(x) {
+            if(window.innerWidth <= 991) {
+                // Mobile behavior
+                document.getElementById(x.id).style.display = 'none';
+                document.getElementById(x.id + '-mobile').classList.remove('mobile-active');
+                document.getElementById(x.id + '-mobile').classList.add('mobile-inactive');
+            } else {
+                // Desktop behavior
+                document.getElementById(x.id).style.transform = "scale(0)";
+                var num = x.id.slice(1);
+                windows[num].pos = false;
+                var cwId = windows[num].openId;
+                if(document.getElementById(cwId)) {
+                    document.getElementById(cwId).remove();
+                }
+            }
+        }
+
+        // Tab functionality
+        function openAboutTab(x) {
+            var aboutTabs = ["about-me", "site-info"];
+            for (var at = 0; at < aboutTabs.length; at++) {
+                document.getElementById("a" + at).classList.remove("a-active-tab");
+                document.getElementById("a" + at + "Content").style.display = "none";
+            }
+            document.getElementById(x.id).classList.add("a-active-tab");
+            document.getElementById(x.id + "Content").style.display = "block";
+        }
+
+        function openSocialTab(x) {
+            var socialTabs = ["links", "resources", "rhythm-ring", "sites"];
+            for (var at = 0; at < socialTabs.length; at++) {
+                document.getElementById("s" + at).classList.remove("s-active-tab");
+                document.getElementById("s" + at + "Content").style.display = "none";
+            }
+            document.getElementById(x.id).classList.add("s-active-tab");
+            document.getElementById(x.id + "Content").style.display = "block";
+        }
+
+        // Initialize first window on load
         window.onload = function() {
-            if(window.innerWidth <= 768) {
+            if(window.innerWidth <= 991) {
                 openMobileWindow('w0');
             } else {
-                openWindow('w0');
+                openWindow(w0);
             }
+            
+            // Set current date and time
+            function updateDateTime() {
+                var now = new Date();
+                document.getElementById('date').textContent = now.toLocaleDateString();
+                document.getElementById('time').textContent = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            }
+            updateDateTime();
+            setInterval(updateDateTime, 60000);
         };
     </script>
 </body>
