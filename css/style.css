@@ -17,6 +17,39 @@
     --s3: #dddddd;
 }
 
+/* Prevent horizontal scrolling */
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+/* Make sure images don't overflow */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Adjust font sizes for mobile */
+@media screen and (max-width: 767px) {
+    body {
+        font-size: 14px;
+    }
+    
+    h2, h3, h4 {
+        font-size: 16px;
+    }
+    
+    .table td {
+        padding: 4px;
+    }
+}
+
+/* Make sure the guestbook iframe is responsive */
+iframe {
+    max-width: 100%;
+    min-height: 500px; /* Adjust as needed */
+}
+
 /* Mobile styles */
 @media screen and (max-width: 991.98px) {
     #mobilenav {
