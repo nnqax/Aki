@@ -361,3 +361,54 @@ function explodeOnClick(e) {
     }, Math.floor(i / 3) * 50);
   }
 }
+
+// Update the openMobileWindow function
+function openMobileWindow(x) {
+    var openW = x.id;
+    
+    // Hide all windows first
+    document.getElementById("w0").classList.remove("mobile-active-window");
+    document.getElementById("w2").classList.remove("mobile-active-window");
+    document.getElementById("w3").classList.remove("mobile-active-window");
+    document.getElementById("w4").classList.remove("mobile-active-window");
+    
+    // Reset all mobile nav items
+    document.getElementById("about-mobile").classList.remove("mobile-active");
+    document.getElementById("about-mobile").classList.add("mobile-inactive");
+    document.getElementById("art-mobile").classList.remove("mobile-active");
+    document.getElementById("art-mobile").classList.add("mobile-inactive");
+    document.getElementById("social-mobile").classList.remove("mobile-active");
+    document.getElementById("social-mobile").classList.add("mobile-inactive");
+    document.getElementById("guestbook-mobile").classList.remove("mobile-active");
+    document.getElementById("guestbook-mobile").classList.add("mobile-inactive");
+    
+    // Show selected window and update nav
+    if (openW == "w0") {
+        document.getElementById("w0").classList.add("mobile-active-window");
+        document.getElementById("about-mobile").classList.remove("mobile-inactive");
+        document.getElementById("about-mobile").classList.add("mobile-active");
+    } else if (openW == "w2") {
+        document.getElementById("w2").classList.add("mobile-active-window");
+        document.getElementById("art-mobile").classList.remove("mobile-inactive");
+        document.getElementById("art-mobile").classList.add("mobile-active");
+    } else if (openW == "w3") {
+        document.getElementById("w3").classList.add("mobile-active-window");
+        document.getElementById("social-mobile").classList.remove("mobile-inactive");
+        document.getElementById("social-mobile").classList.add("mobile-active");
+    } else if (openW == "w4") {
+        document.getElementById("w4").classList.add("mobile-active-window");
+        document.getElementById("guestbook-mobile").classList.remove("mobile-inactive");
+        document.getElementById("guestbook-mobile").classList.add("mobile-active");
+    }
+    
+    // Close any open sitemap
+    if (sitemapOpen) {
+        content.style.maxHeight = null;
+        sitemapOpen = false;
+    }
+}
+
+// Initialize with about page open on mobile
+if (window.innerWidth <= 991.98) {
+    document.getElementById("w0").classList.add("mobile-active-window");
+}
